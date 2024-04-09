@@ -1,21 +1,16 @@
 import { AutoCard } from './AutoCard';
-import style from './AutoList.module.css';
 
 export function AutoList() {
     return (
-        <section className={style.autoList}>
-            <h2>ALL AUTO SKELBIMU LIST CONTENT</h2>
-            <AutoCard />
-            <AutoCard />
-            <AutoCard />
-            <AutoCard />
-            <AutoCard />
-            <AutoCard />
-            <AutoCard />
-            <AutoCard />
-            <AutoCard />
-            <AutoCard />
-            <AutoCard />
+        <section className="container">
+            <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
+                <AutoCard />
+                <AutoCard />
+                <AutoCard />
+                <AutoCard />
+                <AutoCard />
+                <AutoCard />
+            </div>
         </section>
     );
 }
