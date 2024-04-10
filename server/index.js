@@ -44,10 +44,28 @@ app.post('/api/register', (req, res) => {
 });
 
 app.post('/api/login', (req, res) => {
-    console.log(req.body);
+    console.log('LOGIN:', req.body);
+
+    let userExists = false;
+
+    for (const user of users) {
+        if (user.email === req.body.email &&
+            user.password === req.body.password) {
+            userExists = true;
+            break;
+        }
+    }
+
+    if (userExists) {
+        return res.send(JSON.stringify({
+            message: 'User successfully logged in',
+            loggedIn: true,
+        }));
+    }
 
     return res.send(JSON.stringify({
-        message: 'Login API'
+        message: 'Such user does not exist',
+        loggedIn: false,
     }));
 });
 
