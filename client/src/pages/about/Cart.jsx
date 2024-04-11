@@ -1,26 +1,11 @@
 import { Item } from "./Item";
 import style from './Cart.module.css';
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { GlobalContext } from "../../context/GlobalContext";
 
 export function Cart() {
+    const { cartData } = useContext(GlobalContext);
     const [totalSum, setTotalSum] = useState(0);
-    const data = [
-        {
-            name: 'Pomidoras',
-            price: 2,
-            amount: 0,
-        },
-        {
-            name: 'Agurkas',
-            price: 1.5,
-            amount: 0,
-        },
-        {
-            name: 'Svogūnas',
-            price: 5,
-            amount: 0,
-        },
-    ];
 
     function handleTotalSumChange(priceChange) {
         setTotalSum(n => n + priceChange);
@@ -40,7 +25,7 @@ export function Cart() {
                 </thead>
                 <tbody className={style.tbody}>
                     {
-                        data.map((itemData, index) =>
+                        cartData.map((itemData, index) =>
                             <Item key={index} data={itemData} onSumChange={handleTotalSumChange} />)
                     }
                 </tbody>

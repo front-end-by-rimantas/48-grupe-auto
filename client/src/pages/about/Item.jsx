@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 
 export function Item({ data, onSumChange }) {
-    const { updateTotalSumToPay } = useContext(GlobalContext);
+    const { updateTotalSumToPay, updateCartItemAmount } = useContext(GlobalContext);
     const { name, price, amount: initialAmount } = data;
     const [amount, setAmount] = useState(initialAmount);
 
@@ -12,6 +12,7 @@ export function Item({ data, onSumChange }) {
         setAmount(n => n + 1);
         onSumChange(price);
         updateTotalSumToPay(price);
+        updateCartItemAmount(name, 1);
     }
 
     function handleAmountMinus() {
@@ -19,6 +20,7 @@ export function Item({ data, onSumChange }) {
             setAmount(n => n - 1);
             onSumChange(-price);
             updateTotalSumToPay(-price);
+            updateCartItemAmount(name, -1);
         }
     }
 
