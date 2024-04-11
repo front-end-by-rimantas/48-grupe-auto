@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/react.svg';
 
 export function Header() {
-    const isUserLoggedIn = true;
+    const isUserLoggedIn = false;
 
     const guestActions = (
         <div className="col-md-3 text-end">
