@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom';
 import logo from '../../assets/react.svg';
+import { GlobalContext } from '../../context/GlobalContext';
+import { useContext } from 'react';
 
 export function Header() {
-    const isUserLoggedIn = false;
+    const { loginStatus, updateLoginStatus, totalSumToPay } = useContext(GlobalContext);
+
+    function handleLogoutClick() {
+        updateLoginStatus(false);
+    }
 
     const guestActions = (
         <div className="col-md-3 text-end">
@@ -13,8 +19,9 @@ export function Header() {
 
     const userActions = (
         <div className="col-md-3 text-end">
-            Hello, user!
-            <Link to="/logout" className="btn btn-primary">Logout</Link>
+            <span>Cart value: {totalSumToPay} Eur</span>
+            <span>Hello, user!</span>
+            <button onClick={handleLogoutClick} className="btn btn-primary">Logout</button>
         </div>
     );
 
@@ -33,7 +40,7 @@ export function Header() {
                     <Link to="/about" className="nav-link px-2">About</Link>
                 </ul>
 
-                {isUserLoggedIn ? userActions : guestActions}
+                {loginStatus ? userActions : guestActions}
             </header>
         </div>
     );

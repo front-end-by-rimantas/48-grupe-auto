@@ -14,38 +14,41 @@ import { PageMyAutoEdit } from './pages/my-auto-list/PageMyAutoEdit';
 import { PageMyAutoDelete } from './pages/my-auto-list/PageMyAutoDelete';
 import { PageAccountSettings } from './pages/settings/PageAccountSettings';
 import { PageNotFound } from './pages/errors/PageNotFound';
+import { ContextWrapper } from './context/GlobalContext';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route Component={BasicLayout}>
-          <Route index path='/' element={<PageHome />} />
-          <Route path='/auto-list' element={<PageCarListing />} />
-          <Route path='/auto-list/:id' element={<PageCarListingInner />} />
-          <Route path='/about' element={<PageAbout />} />
-        </Route>
+    <ContextWrapper>
+      <BrowserRouter>
+        <Routes>
+          <Route Component={BasicLayout}>
+            <Route index path='/' element={<PageHome />} />
+            <Route path='/auto-list' element={<PageCarListing />} />
+            <Route path='/auto-list/:id' element={<PageCarListingInner />} />
+            <Route path='/about' element={<PageAbout />} />
+          </Route>
 
-        <Route Component={BasicLayout}>
-          <Route path='/register' element={<PageRegister />} />
-          <Route path='/login' element={<PageLogin />} />
-        </Route>
+          <Route Component={BasicLayout}>
+            <Route path='/register' element={<PageRegister />} />
+            <Route path='/login' element={<PageLogin />} />
+          </Route>
 
-        <Route Component={BasicLayout}>
-          <Route path='/account' element={<PageDashboard />} />
-          <Route path='/account/my-auto-list' element={<PageMyAutoList />} />
-          <Route path='/account/my-auto-list/create' element={<PageMyAutoCreate />} />
-          <Route path='/account/my-auto-list/view' element={<PageMyAutoView />} />
-          <Route path='/account/my-auto-list/edit' element={<PageMyAutoEdit />} />
-          <Route path='/account/my-auto-list/delete' element={<PageMyAutoDelete />} />
-          <Route path='/account/settings' element={<PageAccountSettings />} />
-        </Route>
+          <Route Component={BasicLayout}>
+            <Route path='/account' element={<PageDashboard />} />
+            <Route path='/account/my-auto-list' element={<PageMyAutoList />} />
+            <Route path='/account/my-auto-list/create' element={<PageMyAutoCreate />} />
+            <Route path='/account/my-auto-list/view' element={<PageMyAutoView />} />
+            <Route path='/account/my-auto-list/edit' element={<PageMyAutoEdit />} />
+            <Route path='/account/my-auto-list/delete' element={<PageMyAutoDelete />} />
+            <Route path='/account/settings' element={<PageAccountSettings />} />
+          </Route>
 
-        <Route Component={BasicLayout}>
-          <Route path='*' element={<PageNotFound />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+          <Route Component={BasicLayout}>
+            <Route path='*' element={<PageNotFound />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ContextWrapper>
   );
 }
 
