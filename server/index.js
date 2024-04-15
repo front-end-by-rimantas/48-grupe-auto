@@ -34,11 +34,13 @@ app.post('/api/register', (req, res) => {
         console.log(users);
 
         return res.send(JSON.stringify({
+            type: 'success',
             message: 'User successfully registered'
         }));
     }
 
     return res.send(JSON.stringify({
+        type: 'error',
         message: 'User already exists'
     }));
 });
