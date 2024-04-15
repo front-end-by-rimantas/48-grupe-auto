@@ -19,6 +19,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const users = [];
 
+const cars = [
+    {
+        id: 1,
+        name: 'Auto pavadinimas',
+        img: 'http://localhost:4821/img/cars/1.jpg',
+        price: 0,
+    },
+];
+
 app.post('/api/register', (req, res) => {
     let isUniqueUserEmail = true;
 
@@ -46,8 +55,6 @@ app.post('/api/register', (req, res) => {
 });
 
 app.post('/api/login', (req, res) => {
-    console.log('LOGIN:', req.body);
-
     let userExists = false;
 
     for (const user of users) {
@@ -68,6 +75,28 @@ app.post('/api/login', (req, res) => {
     return res.send(JSON.stringify({
         message: 'Such user does not exist',
         loggedIn: false,
+    }));
+});
+
+app.get('/api/cart-details', (req, res) => {
+    return res.send(JSON.stringify({
+        data: [
+            {
+                name: 'Pomidoras',
+                price: 2,
+                amount: 0,
+            },
+            {
+                name: 'Agurkas',
+                price: 1.5,
+                amount: 0,
+            },
+            {
+                name: 'Svogūnas',
+                price: 5,
+                amount: 0,
+            },
+        ],
     }));
 });
 

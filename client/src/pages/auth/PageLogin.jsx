@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../../context/GlobalContext';
+import { Alert } from '../../components/alert/Alert';
 
 export function PageLogin() {
     const { updateLoginStatus } = useContext(GlobalContext);
@@ -8,6 +9,8 @@ export function PageLogin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isPasswordVisible, setPasswordVisible] = useState(false);
+    const [responseText, setResponseText] = useState('');
+    const [responseType, setResponseType] = useState('');
 
 
     function handleEmailChange(e) {
@@ -26,7 +29,8 @@ export function PageLogin() {
         e.preventDefault();
 
         if (email === '' || password === '') {
-            console.error('ERROR: blogi formos duomenys');
+            setResponseType('error');
+            setResponseText('Blogi formos duomenys');
             return;
         }
 
@@ -40,6 +44,9 @@ export function PageLogin() {
         })
             .then(res => res.json())
             .then(data => {
+                setResponseText(data.message);
+                setResponseType(data.loggedIn ? 'success' : 'error');
+
                 if (data.loggedIn === true) {
                     updateLoginStatus(true);
                     navigate('/account');
@@ -53,6 +60,8 @@ export function PageLogin() {
             <div className="row">
                 <form onSubmit={handleFormSubmit} className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 col-xxl-4 offset-xxl-4">
                     <h1 className="h3 mb-3 fw-normal">Please login</h1>
+
+                    <Alert type={responseType} text={responseText} />
 
                     <div className="form-floating">
                         <input type="email" onChange={handleEmailChange} value={email} className="form-control" id="floatingInput" placeholder="name@example.com" />
