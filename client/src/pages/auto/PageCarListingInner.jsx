@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import carImg from '../../assets/cars/1.jpg';
 import { NewestCarsList } from '../../components/auto-list/NewestCarsList';
 import { useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalContext';
@@ -23,7 +22,7 @@ export function PageCarListingInner() {
             <section className="container px-4">
                 <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
                     <div className="col-10 col-sm-8 col-lg-6">
-                        <img src={carImg} className="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy" />
+                        <img src="http://localhost:4821/img/cars/1.jpg" className="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy" />
                     </div>
                     <div className="col-lg-6">
                         <h1 className="display-5 fw-bold text-body-emphasis lh-1 mb-3">Automobilio pavadinimas</h1>
