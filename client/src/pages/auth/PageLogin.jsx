@@ -4,14 +4,13 @@ import { GlobalContext } from '../../context/GlobalContext';
 import { Alert } from '../../components/alert/Alert';
 
 export function PageLogin() {
-    const { updateLoginStatus } = useContext(GlobalContext);
+    const { updateLoginStatus, updateUserId } = useContext(GlobalContext);
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isPasswordVisible, setPasswordVisible] = useState(false);
     const [responseText, setResponseText] = useState('');
     const [responseType, setResponseType] = useState('');
-
 
     function handleEmailChange(e) {
         setEmail(e.target.value);
@@ -49,6 +48,7 @@ export function PageLogin() {
 
                 if (data.loggedIn === true) {
                     updateLoginStatus(true);
+                    updateUserId(data.userId);
                     navigate('/account');
                 }
             })
