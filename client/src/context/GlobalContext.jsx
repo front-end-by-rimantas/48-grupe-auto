@@ -39,7 +39,7 @@ export function ContextWrapper(props) {
 
             fetch('http://localhost:4821/api/my-cars/' + userId)
                 .then(res => res.json())
-                .then(dataObj => setCartData(dataObj.data))
+                .then(dataObj => setMyCars(dataObj.list))
                 .catch(console.error);
         }
     }, [loginStatus]);
@@ -68,6 +68,14 @@ export function ContextWrapper(props) {
         setMyCars(list);
     }
 
+    function addMyNewCar(car) {
+        setMyCars(prev => [...prev, car]);
+    }
+
+    function deleteMyCar(carId) {
+        setMyCars(prev => prev.filter(car => car.id !== carId));
+    }
+
     function updateCartItemAmount(name, amountChange) {
         console.log('>>>', name, amountChange);
     }
@@ -87,6 +95,8 @@ export function ContextWrapper(props) {
         updateAllCars,
         myCars,
         updateMyCars,
+        addMyNewCar,
+        deleteMyCar,
     };
 
     return (

@@ -9,9 +9,7 @@ import { PageLogin } from './pages/auth/PageLogin';
 import { PageDashboard } from './pages/dashboard/PageDashboard';
 import { PageMyAutoList } from './pages/my-auto-list/PageMyAutoList';
 import { PageMyAutoCreate } from './pages/my-auto-list/PageMyAutoCreate';
-import { PageMyAutoView } from './pages/my-auto-list/PageMyAutoView';
 import { PageMyAutoEdit } from './pages/my-auto-list/PageMyAutoEdit';
-import { PageMyAutoDelete } from './pages/my-auto-list/PageMyAutoDelete';
 import { PageAccountSettings } from './pages/settings/PageAccountSettings';
 import { PageNotFound } from './pages/errors/PageNotFound';
 import { ContextWrapper } from './context/GlobalContext';
@@ -24,7 +22,7 @@ function App() {
           <Route Component={BasicLayout}>
             <Route index path='/' element={<PageHome />} />
             <Route path='/auto-list' element={<PageCarListing />} />
-            <Route path='/auto-list/:id' element={<PageCarListingInner />} />
+            <Route path='/auto-list/:carId' element={<PageCarListingInner />} />
             <Route path='/about' element={<PageAbout />} />
           </Route>
 
@@ -37,9 +35,7 @@ function App() {
             <Route path='/account' element={<PageDashboard />} />
             <Route path='/account/my-auto-list' element={<PageMyAutoList />} />
             <Route path='/account/my-auto-list/create' element={<PageMyAutoCreate />} />
-            <Route path='/account/my-auto-list/view' element={<PageMyAutoView />} />
             <Route path='/account/my-auto-list/edit' element={<PageMyAutoEdit />} />
-            <Route path='/account/my-auto-list/delete' element={<PageMyAutoDelete />} />
             <Route path='/account/settings' element={<PageAccountSettings />} />
           </Route>
 

@@ -1,7 +1,22 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { GlobalContext } from '../../context/GlobalContext';
 
 export function PageMyAutoList() {
-    const allCars = [];
+    const { myCars, deleteMyCar } = useContext(GlobalContext);
+
+    function handleDeleteClick(carId) {
+        fetch('http://localhost:4821/api/car/' + carId, {
+            method: 'DELETE',
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.type === 'success') {
+                    deleteMyCar(carId);
+                }
+            })
+            .catch(console.error);
+    }
 
     return (
         <div className="container">
@@ -25,14 +40,15 @@ export function PageMyAutoList() {
                         </thead>
                         <tbody className="table-group-divider">
                             {
-                                allCars.map(car => (
+                                myCars.map(car => (
                                     <tr key={car.id}>
                                         <td>{car.id}</td>
                                         <td><img src={car.img} alt="Car" style={{ height: 60 }} /></td>
-                                        <td>{car.name}</td>
+                                        <td><Link to={'/auto-list/' + car.id}>{car.name}</Link></td>
                                         <td>{car.price}</td>
                                         <td>
-                                            ACTIONS
+                                            {/* <button>Edit</button> */}
+                                            <button onClick={() => handleDeleteClick(car.id)}>Delete</button>
                                         </td>
                                     </tr>
                                 ))

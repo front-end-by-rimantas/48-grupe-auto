@@ -152,7 +152,7 @@ const users = [
 // ];
 
 let lastCarId = 0;
-const cars = [
+let cars = [
     // {
     //     userId: 1,
     //     id: 1,
@@ -275,14 +275,30 @@ app.post('/api/create-car', (req, res) => {
     return res.send(JSON.stringify({
         type: 'success',
         message: 'Car created',
+        car: cars.at(-1),
     }));
 });
 
 app.get('/api/my-cars/:userId', (req, res) => {
-    console.log(req.params);
+    return res.send(JSON.stringify({
+        list: cars.filter(car => car.userId === +req.params.userId),
+    }));
+});
+
+app.get('/api/car/:carId', (req, res) => {
+    return res.send(JSON.stringify({
+        cars: cars.filter(car => car.id === +req.params.carId),
+    }));
+});
+
+app.delete('/api/car/:carId', (req, res) => {
+    // gal galima kazkaip kitaip?
+    // jog nereiketu daryti let ir butu galima pasilikti const?
+    cars = cars.filter(car => car.id !== +req.params.carId);
 
     return res.send(JSON.stringify({
-        list: cars.filter(car => car.userId === req.params.userId),
+        type: 'success',
+        message: 'Auto deleted',
     }));
 });
 
