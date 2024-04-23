@@ -2,6 +2,30 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import bodyParser from 'body-parser';
+import mysql from 'mysql2/promise';
+
+try {
+    const connection = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+    });
+
+    await connection.query('USE grupe48');
+
+    const sql = 'SELECT * FROM users;';
+    const ats = await connection.execute(sql);
+
+    console.log(ats[0]);
+
+} catch (error) {
+    console.log(error);
+}
+
+
+
+
+
 
 const app = express();
 
