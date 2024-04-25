@@ -3,6 +3,8 @@ import { connection } from "../../db.js";
 export async function apiRegisterPost(req, res) {
     const minEmailLength = 6;
     const maxEmailLength = 50;
+    const minPasswordLength = 12;
+    const maxPasswordLength = 100;
     const { email, password } = req.body;
 
     if (typeof email !== 'string') {
@@ -26,6 +28,27 @@ export async function apiRegisterPost(req, res) {
         }));
     }
 
+    if (typeof password !== 'string') {
+        return res.send(JSON.stringify({
+            type: 'error',
+            message: 'Password has to be a string value',
+        }));
+    }
+
+    if (password.length < minPasswordLength) {
+        return res.send(JSON.stringify({
+            type: 'error',
+            message: `Password is too short, has to be at least ${minPasswordLength} symbols`,
+        }));
+    }
+
+    if (password.length > maxPasswordLength) {
+        return res.send(JSON.stringify({
+            type: 'error',
+            message: `Password is too long, has to be no more than ${maxPasswordLength} symbols`,
+        }));
+    }
+
     try {
         const selectQuery = `SELECT * FROM users WHERE email = ?;`;
         const dbResponse = await connection.execute(selectQuery, [email]);
@@ -44,7 +67,12 @@ export async function apiRegisterPost(req, res) {
         const insertQuery = `INSERT INTO users (email, password) VALUES (?, ?);`;
         const dbResponse = await connection.execute(insertQuery, [email, password]);
 
-        console.log(dbResponse);
+        if (dbResponse[0].affectedRows !== 1) {
+            return res.send(JSON.stringify({
+                type: 'error',
+                message: 'User could not be created, for some weird reason',
+            }));
+        }
 
         return res.send(JSON.stringify({
             type: 'success',
