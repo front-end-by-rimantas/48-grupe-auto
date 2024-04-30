@@ -8,6 +8,7 @@ import { apiRouter } from './api/api.js';
 const app = express();
 
 const corsOptions = {
+    credentials: true,
     origin: 'http://localhost:4820',
 };
 const helmetOptions = {

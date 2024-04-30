@@ -31,7 +31,23 @@ export function ContextWrapper(props) {
     const [myCars, setMyCars] = useState(initialContext.myCars);
 
     useEffect(() => {
+        const localStatus = localStorage.getItem('isLoggedIn') === 'true' ? true : false;
+        const localId = localStorage.getItem('userId');
+
+        if (localStatus) {
+            setLoginStatus(localStatus);
+        }
+
+        if (localId !== null) {
+            setUserId(localId);
+        }
+    }, []);
+
+    useEffect(() => {
         if (loginStatus === true) {
+            localStorage.setItem('userId', userId);
+            localStorage.setItem('isLoggedIn', true);
+
             fetch('http://localhost:4821/api/cart-details')
                 .then(res => res.json())
                 .then(dataObj => setCartData(dataObj.data))
@@ -39,13 +55,23 @@ export function ContextWrapper(props) {
 
             fetch('http://localhost:4821/api/cars/my/' + userId)
                 .then(res => res.json())
-                .then(dataObj => setMyCars(dataObj.list))
+                .then(dataObj => {
+                    if (dataObj.type === 'success') {
+                        setMyCars(dataObj.list);
+                    } else {
+                        console.error(dataObj.message);
+                    }
+                })
                 .catch(console.error);
         }
-    }, [loginStatus]);
+    }, [loginStatus, userId]);
 
     function updateLoginStatus(newStatusValue) {
         setLoginStatus(newStatusValue);
+
+        if (newStatusValue === false) {
+            localStorage.clear();
+        }
     }
 
     function updateUserId(id) {
