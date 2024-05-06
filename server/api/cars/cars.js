@@ -66,7 +66,7 @@ carsRouter.post('/create', async (req, res) => {
                     id: dbResponse[0].insertId,
                     name,
                     price,
-                    img: '',
+                    img: img,
                 },
             }));
         }

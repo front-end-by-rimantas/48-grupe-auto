@@ -20,7 +20,7 @@ export function Header() {
     );
 
     const userActions = (
-        <div className="d-flex align-items-center col-md-5 text-end">
+        <div className="d-flex align-items-center col-md-5 text-end justify-content-end">
             <span>Cart value: {totalSumToPay} Eur</span>
             <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <Link to="/account" className="nav-link px-2 link-secondary">Account</Link>

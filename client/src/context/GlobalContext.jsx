@@ -37,7 +37,10 @@ export function ContextWrapper(props) {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                if (data.type === 'success') {
+                    setUserId(data.user.id);
+                    setLoginStatus(true);
+                }
             })
             .catch(console.error);
     }, []);
