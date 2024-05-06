@@ -52,7 +52,7 @@ export function PageMyAutoCreate() {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             },
-            body: JSON.stringify({ userId, name, price: +price }),
+            body: JSON.stringify({ userId, name, price: +price, image }),
         })
             .then(res => res.json())
             .then(data => {
