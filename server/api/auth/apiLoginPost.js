@@ -1,4 +1,5 @@
 import { connection } from "../../db.js";
+import { hash } from "../../lib/hash.js";
 import { randomString } from "../../lib/randomString.js";
 
 export async function apiLoginPost(req, res) {
@@ -54,7 +55,7 @@ export async function apiLoginPost(req, res) {
 
     try {
         const selectQuery = `SELECT * FROM users WHERE email = ? AND password = ?;`;
-        const dbResponse = await connection.execute(selectQuery, [email, password]);
+        const dbResponse = await connection.execute(selectQuery, [email, hash(password)]);
 
         if (dbResponse[0].length === 0) {
             return res.send(JSON.stringify({
