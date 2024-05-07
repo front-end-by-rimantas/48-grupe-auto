@@ -47,8 +47,8 @@ export function PageMyAutoList() {
                                         <td><Link to={'/auto-list/' + car.id}>{car.name}</Link></td>
                                         <td>{car.price}</td>
                                         <td>
-                                            {/* <button>Edit</button> */}
-                                            <button onClick={() => handleDeleteClick(car.id)}>Delete</button>
+                                            <Link className='btn btn-sm btn-primary' to={`/account/my-auto-list/${car.id}/edit`}>Edit</Link>
+                                            <button className='btn btn-sm btn-danger' onClick={() => handleDeleteClick(car.id)}>Delete</button>
                                         </td>
                                     </tr>
                                 ))
