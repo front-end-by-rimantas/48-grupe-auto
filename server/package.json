@@ -5,9 +5,9 @@
     "type": "module",
     "main": "index.js",
     "scripts": {
-        "dev": "nodemon ./index.js",
-        "prod": "nodemon ./index.js",
-        "stage": "nodemon ./index.js",
+        "dev": "nodemon ./index.js --env=.env.development",
+        "prod": "nodemon ./index.js --env=.env.production",
+        "stage": "nodemon ./index.js --env=.env.stage",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
