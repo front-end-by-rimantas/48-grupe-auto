@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import { connection } from './db.js';
 import { apiRouter } from './api/api.js';
+import { SERVER_PORT } from './env.js';
 
 const app = express();
 
@@ -74,6 +75,6 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
-app.listen(4821, () => {
-    console.log(`\nhttp://localhost:4821`);
+app.listen(SERVER_PORT, () => {
+    console.log(`\nhttp://localhost:${SERVER_PORT}`);
 });
